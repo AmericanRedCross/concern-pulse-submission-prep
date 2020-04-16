@@ -59,6 +59,7 @@ async.waterfall([
     });
   },
   function(result, cb) { // step 3 - write the csv
+    console.log("writing the csv...");
     var csv = Papa.unparse(result);
     var fileName = "output.csv";
     const outputFile = path.join(__dirname,'files',fileName);
@@ -66,6 +67,7 @@ async.waterfall([
       fs.unlinkSync(outputFile);
     }
     fs.writeFileSync(outputFile, csv);
+    cb();
   }],
   function(err, result){
     if(err) {
